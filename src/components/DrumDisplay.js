@@ -1,11 +1,11 @@
 import React from 'react';
+import { Jumbotron } from 'reactstrap';
 
 const DrumDisplay = (props) => {
-	
 	return (
-        <div id="display">
+        <Jumbotron id="display">
             DrumDisplay
-        </div>
+        </Jumbotron>
     );
 };
 
