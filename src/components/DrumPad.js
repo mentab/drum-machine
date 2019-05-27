@@ -5,11 +5,12 @@ const DrumPad = (props) => {
 	const id = props.id;
 	const src = props.src;
 	const desc = props.desc;
+	const play = props.play;
 	return (
 		<Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} className="drum-pad" id={desc}>
         	<CardTitle>{id}</CardTitle>
         	<CardText>{id}</CardText>
-        	<Button>{id}<audio className="clip" id={id} src={src}></audio></Button>
+        	<Button onClick={play}>{id}<audio className="clip" id={id} src={src}></audio></Button>
       	</Card>
     );
 };
