@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DrumDisplay from './DrumDisplay';
 import DrumPad from './DrumPad';
 import { Container, Row, Col, CardColumns } from 'reactstrap';
+import drums from '../drums';
 
 class DrumMachine extends Component {
 	constructor(props) {
@@ -18,15 +19,11 @@ class DrumMachine extends Component {
 			display: event.target.innerText
 		});
 	}
-	
-	handleOnKeyDown(event) {
-		// TODO
-	}
 
 	render() {
 		const play = this.handlePlay;
-		// const down = this.handleOnKeyDown;
 		const display = this.state.display;
+		const drumPads = drums.map(i => <DrumPad id={i.id} key={i.id} src={i.src} desc={i.desc} play={play}/>);
 		return (
 		<Container id="drum-machine">
 			<Row>
@@ -37,15 +34,7 @@ class DrumMachine extends Component {
 			<Row>
 				<Col>
 					<CardColumns>
-						<DrumPad id="Q" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="W" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="E" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="A" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="S" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="D" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="Z" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="X" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
-						<DrumPad id="C" src="/media/examples/t-rex-roar.mp3" desc="desc" play={play}/>
+						{drumPads}
 					</CardColumns>
 				</Col>
 			</Row>
