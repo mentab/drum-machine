@@ -4,33 +4,18 @@ import { Card, Button, CardTitle, CardText } from 'reactstrap';
 class DrumPad extends Component {
 	constructor(props) {
 		super(props);
-		this.handleKeyDown = this.handleKeyDown.bind(this)
 	}
-	
-	componentDidMount() {
-		document.addEventListener("keydown", this.handleKeyDown);
-	}
-	
-	componentWillUnmount() {
-		document.removeEventListener("keydown", this.handleKeyDown);
-	}
-	
-	handleKeyDown(event) {
-		if (this.props.id === event.key) {
-			console.log(this.props.id);
-		}
-	}
-	
+
 	render() {
 		const id = this.props.id;
 		const src = this.props.src;
 		const desc = this.props.desc;
-		const play = this.props.play;
+		const click = this.props.click;
 		return (
 			<Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }} className="drum-pad" id={desc}>
         		<CardTitle>{id}</CardTitle>
         		<CardText>{id}</CardText>
-        		<Button onClick={play}>{id}<audio className="clip" id={id} src={src}></audio></Button>
+        		<Button onClick={click}>{id}<audio className="clip" id={id} src={src}></audio></Button>
       		</Card>
 		);
 	}

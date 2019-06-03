@@ -7,23 +7,47 @@ import drums from '../drums';
 class DrumMachine extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			display: ''
 		}
+		this.audio = null;
+		this.handleKeyDown = this.handleKeyDown.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 		this.handlePlay = this.handlePlay.bind(this);
 	}
 
-	handlePlay(event) {
-		this.setState({
-			display: event.target.innerText
-		});
+	componentDidMount() {
+		document.addEventListener("keydown", this.handleKeyDown);
+	}
+	
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.handleKeyDown);
+	}
+	
+	handleKeyDown(event) {
+		this.handlePlay(event.key);
+	}
+
+	handleClick(event) {
+		this.handlePlay(event.target.innerText);
+	}
+
+	handlePlay(key)
+	{
+		const drumKey = drums.find(drum => drum.id === key);
+		if (drumKey) {
+			this.setState({
+				display: drumKey.id
+			});
+			this.audio = new Audio(drumKey.src);
+			this.audio.play();
+		}
 	}
 
 	render() {
-		const play = this.handlePlay;
+		const click = this.handleClick;
 		const display = this.state.display;
-		const drumPads = drums.map(i => <DrumPad id={i.id} key={i.id} src={i.src} desc={i.desc} play={play}/>);
+		const drumPads = drums.map(i => <DrumPad id={i.id} key={i.id} src={i.src} desc={i.desc} click={click}/>);
 		return (
 		<Container id="drum-machine">
 			<Row>
