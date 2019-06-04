@@ -8,9 +8,10 @@ class DrumMachine extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			display: ''
+			display: 'Press a key to play a sound !'
 		}
 		this.audio = null;
+		this.timeout = null;
 		this.handleKeyDown = this.handleKeyDown.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.handlePlay = this.handlePlay.bind(this);
@@ -19,11 +20,11 @@ class DrumMachine extends Component {
 	componentDidMount() {
 		document.addEventListener("keydown", this.handleKeyDown);
 	}
-	
+
 	componentWillUnmount() {
 		document.removeEventListener("keydown", this.handleKeyDown);
 	}
-	
+
 	handleKeyDown(event) {
 		this.handlePlay(event.key);
 	}
@@ -34,13 +35,20 @@ class DrumMachine extends Component {
 
 	handlePlay(key)
 	{
+		clearTimeout(this.timeout);
+
 		const drumKey = drums.find(drum => drum.id === key);
+
 		if (drumKey) {
+			document.getElementById(key).play();
 			this.setState({
 				display: drumKey.id
 			});
-			this.audio = new Audio(drumKey.src);
-			this.audio.play();
+			this.timeout = setTimeout(() => {
+				this.setState({
+					display: 'Press a key to play a new sound !'
+				})
+			}, 1000);
 		}
 	}
 
