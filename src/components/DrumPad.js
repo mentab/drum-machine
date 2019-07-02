@@ -1,11 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button, CardTitle, CardText } from 'reactstrap';
 
 const DrumPad = (props) => {
-	const id = props.id;
-	const src = props.src;
-	const desc = props.desc;
-	const click = props.click;
+	const { id, src, desc, click } = props;
 	return (
 		<Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
         	<CardTitle>{id}</CardTitle>
@@ -14,5 +12,12 @@ const DrumPad = (props) => {
       	</Card>
 	);
 };
+
+DrumPad.propTypes = {
+	id: PropTypes.string,
+	src: PropTypes.string,
+	desc: PropTypes.string,
+	click: PropTypes.func
+}
 
 export default DrumPad;

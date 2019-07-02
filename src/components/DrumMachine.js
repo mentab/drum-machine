@@ -12,9 +12,6 @@ class DrumMachine extends Component {
 		}
 		this.audio = null;
 		this.timeout = null;
-		this.handleKeyDown = this.handleKeyDown.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-		this.handlePlay = this.handlePlay.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,16 +22,15 @@ class DrumMachine extends Component {
 		document.removeEventListener("keydown", this.handleKeyDown);
 	}
 
-	handleKeyDown(event) {
+	handleKeyDown = (event) => {
 		this.handlePlay(event.key);
 	}
 
-	handleClick(event) {
+	handleClick = (event) => {
 		this.handlePlay(event.target.innerText);
 	}
 
-	handlePlay(key)
-	{
+	handlePlay = (key) => {
 		clearTimeout(this.timeout);
 
 		const drumKey = drums.find(drum => drum.id === key);
@@ -54,7 +50,7 @@ class DrumMachine extends Component {
 
 	render() {
 		const click = this.handleClick;
-		const display = this.state.display;
+		const { display } = this.state;
 		const drumPads = drums.map(i => <DrumPad id={i.id} key={i.id} src={i.src} desc={i.desc} click={click}/>);
 		return (
 		<Container id="drum-machine">
